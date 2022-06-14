@@ -1,0 +1,22 @@
+.c-labels {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.c-labels__header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.c-labels__header__line {
+  flex-grow: 1;
+  margin-left: 8px;
+  border: 0;
+  height: 1px;
+  background-color: #d1d5db;
+}
+
+.c-labels__labels * + * {
+  margin-top: 4px;
+}

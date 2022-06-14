@@ -1,0 +1,21 @@
+.c-menu-item {
+  display: flex;
+  align-items: center;
+  padding: 8px 10px;
+  font-weight: 500;
+  font-size: 14px;
+  color: #4b5563;
+  border-radius: 6px;
+  cursor: pointer;
+  height: 40px;
+}
+
+.c-menu-item--selected {
+  color: black;
+  background-color: #f3f4f6;
+}
+
+.c-menu-item__text {
+  flex-grow: 1;
+  height: 100%;
+}

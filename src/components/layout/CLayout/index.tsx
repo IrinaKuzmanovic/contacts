@@ -1,8 +1,9 @@
-import React, { FC, ReactNode } from 'react'
+import { FC, ReactNode } from 'react'
 import { Layout } from 'antd'
 
+import CNavigation from 'components/navigation/CNavigation'
+import CSearch from 'components/layout/CSearch'
 import './style.scss'
-import CMenu from 'components/navigation/CMenu'
 
 const { Header, Sider, Content } = Layout
 
@@ -14,10 +15,12 @@ const CLayout: FC<CLayoutProps> = ({ children }) => {
   return (
     <Layout className="layout">
       <Sider className="layout__sider" width="255px">
-        <CMenu />
+        <CNavigation />
       </Sider>
-      <Layout>
-        <Header className="layout__header">Header</Header>
+      <Layout className="layout__child">
+        <Header className="layout__header">
+          <CSearch />
+        </Header>
         <Content className="layout__content">{children}</Content>
       </Layout>
     </Layout>
