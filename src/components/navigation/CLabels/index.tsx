@@ -1,11 +1,13 @@
 import React, { FC } from 'react'
-import { Button } from 'antd'
-import { PlusOutlined } from '@ant-design/icons'
+
 import CItem from '../CItem'
 import './style.scss'
-import { BaseProps } from 'baseProps'
 
-const CLabels: FC<BaseProps> = ({ style }) => {
+type CLabelsProps = {
+  style?: React.CSSProperties
+}
+
+const CLabels: FC<CLabelsProps> = ({ style }) => {
   const items = [
     {
       text: 'Work',
