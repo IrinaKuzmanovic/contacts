@@ -4,6 +4,7 @@ import { Layout } from 'antd'
 import CNavigation from 'components/navigation/CNavigation'
 import CSearch from 'components/layout/CSearch'
 import './style.scss'
+import CHeading from '../CHeading'
 
 const { Header, Sider, Content } = Layout
 
@@ -21,7 +22,10 @@ const CLayout: FC<CLayoutProps> = ({ children }) => {
         <Header className="layout__header">
           <CSearch />
         </Header>
-        <Content className="layout__content">{children}</Content>
+        <Content className="layout__content">
+          <CHeading>{children}</CHeading>
+          <div>{children}</div>
+        </Content>
       </Layout>
     </Layout>
   )
