@@ -1,15 +1,16 @@
 import { FC } from 'react'
 
-import { BaseProps } from 'baseProps'
 import './style.scss'
 
 type CLayoutProps = {
   text: string
+  type?: 'button' | 'submit' | 'reset'
+  style?: React.CSSProperties
 }
 
-const PrimaryButton: FC<CLayoutProps & BaseProps> = ({ text, style }) => {
+const PrimaryButton: FC<CLayoutProps> = ({ text, style, type = 'button' }) => {
   return (
-    <button className="primary-button" style={style}>
+    <button type={type} className="primary-button" style={style}>
       {text}
     </button>
   )

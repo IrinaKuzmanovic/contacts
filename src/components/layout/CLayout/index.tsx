@@ -4,15 +4,15 @@ import { Layout } from 'antd'
 import CNavigation from 'components/navigation/CNavigation'
 import CSearch from 'components/layout/CSearch'
 import './style.scss'
-import CHeading from '../CHeading'
 
 const { Header, Sider, Content } = Layout
 
 type CLayoutProps = {
   children?: ReactNode
+  heading: string
 }
 
-const CLayout: FC<CLayoutProps> = ({ children }) => {
+const CLayout: FC<CLayoutProps> = ({ children, heading }) => {
   return (
     <Layout className="layout">
       <Sider className="layout__sider" width="255px">
@@ -23,8 +23,8 @@ const CLayout: FC<CLayoutProps> = ({ children }) => {
           <CSearch />
         </Header>
         <Content className="layout__content">
-          <CHeading>{children}</CHeading>
-          <div>{children}</div>
+          <div className="layout__content__heading">{heading}</div>
+          {children}
         </Content>
       </Layout>
     </Layout>
