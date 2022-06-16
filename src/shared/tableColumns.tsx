@@ -1,8 +1,9 @@
 import type { ColumnsType } from 'antd/lib/table'
 import { Space } from 'antd'
-import Icon from 'assets/Icon.svg'
-import IconDelete from 'assets/IconDelete.svg'
-import IconEdit from 'assets/IconEdit.svg'
+import FavouriteOn from 'assets/favouriteOn.svg'
+import FavouriteOff from 'assets/favouriteOff.svg'
+import DeleteIcon from 'assets/deleteIcon.svg'
+import EditIcon from 'assets/editIcon.svg'
 
 export const tableColumns = (
   onFavouriteClick?: (id: number, favourite: boolean) => void,
@@ -29,7 +30,7 @@ export const tableColumns = (
       <Space size="middle">
         {record.favourite && (
           <img
-            src={Icon}
+            src={FavouriteOn}
             alt="icon"
             onClick={() =>
               onFavouriteClick && onFavouriteClick(record.id, false)
@@ -38,7 +39,7 @@ export const tableColumns = (
         )}
         {!record.favourite && (
           <img
-            src={Icon}
+            src={FavouriteOff}
             alt="icon"
             onClick={() =>
               onFavouriteClick && onFavouriteClick(record.id, true)
@@ -46,12 +47,12 @@ export const tableColumns = (
           />
         )}
         <img
-          src={IconDelete}
+          src={DeleteIcon}
           alt="icon delete"
           onClick={() => onDeleteClick && onDeleteClick(record.id)}
         />
         <img
-          src={IconEdit}
+          src={EditIcon}
           alt="icon edit"
           onClick={() => onEditClick && onEditClick(record.id)}
         />

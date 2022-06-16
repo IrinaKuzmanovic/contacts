@@ -16,14 +16,14 @@ const data: Contact[] = [
     name: 'Cody Fisher',
     email: 'cody.fisher@example.com',
     phoneNumber: '+35412877',
-    favourite: true
+    favourite: false
   },
   {
     id: 3,
     name: 'Esther Howard',
     email: 'esther.howard@example.com',
     phoneNumber: '+37412589',
-    favourite: true
+    favourite: false
   }
 ]
 
