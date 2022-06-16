@@ -1,18 +1,49 @@
-import React from 'react'
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { Route, Routes, useLocation } from 'react-router-dom'
 
 import CLayout from 'components/layout/CLayout'
-import CreateContactLayout from 'components/CreateContactForm'
+import CreateContactForm from 'components/CreateContactForm'
 import EditContactForm from 'components/EditContactForm'
+import Contacts from 'components/Contacts'
+import Favourites from 'components/Favourites'
 
-function App() {
+const App = () => {
+  const location = useLocation()
+
+  const [heading, setHeading] = useState<string>('')
+
+  useEffect(() => {
+    switch (location.pathname) {
+      case '/':
+        setHeading('Contacts')
+        break
+      case '/favourites':
+        setHeading('Favourites')
+        break
+      case '/create-contact':
+        setHeading('Create contact')
+        break
+      case '/edit-contact':
+        setHeading('Edit contact')
+        break
+    }
+  }, [location])
+
   return (
-    <Router>
-      <CLayout heading="Create contact">
-        {/* <CreateContactLayout style={{ maxWidth: '486px' }} /> */}
-        <EditContactForm style={{ maxWidth: '486px' }} />
-      </CLayout>
-    </Router>
+    <CLayout heading={heading}>
+      <Routes>
+        <Route path="/favourites" element={<Favourites />} />
+        <Route
+          path="/create-contact"
+          element={<CreateContactForm style={{ maxWidth: '486px' }} />}
+        />
+        <Route
+          path="/edit-contact"
+          element={<EditContactForm style={{ maxWidth: '486px' }} />}
+        />
+        <Route path="/" element={<Contacts />} />
+      </Routes>
+    </CLayout>
   )
 }
 
