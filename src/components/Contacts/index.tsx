@@ -1,38 +1,33 @@
 import { FC } from 'react'
 import { Table } from 'antd'
-import { DataType } from 'shared/DataType'
-import { columns } from 'shared/DataColumns'
-import CModal from 'shared/CModal'
 
-import './style.scss'
+import { Contact, tableColumns } from 'shared/tableColumns'
 
-const data: DataType[] = [
+const data: Contact[] = [
   {
-    key: '1',
+    id: 1,
     name: 'Jane Cooper',
     email: 'jane.cooper@example.com',
-    phoneNumber: '+365897456555'
+    phoneNumber: '+365897456555',
+    favourite: true
   },
   {
-    key: '2',
+    id: 2,
     name: 'Cody Fisher',
     email: 'cody.fisher@example.com',
-    phoneNumber: '+35412877'
+    phoneNumber: '+35412877',
+    favourite: true
   },
   {
-    key: '3',
+    id: 3,
     name: 'Esther Howard',
     email: 'esther.howard@example.com',
-    phoneNumber: '+37412589'
+    phoneNumber: '+37412589',
+    favourite: true
   }
 ]
 
 const Contacts: FC = () => {
-  return (
-    <div>
-      <Table className="table" columns={columns} dataSource={data} />
-      <CModal />
-    </div>
-  )
+  return <Table className="table" columns={tableColumns()} dataSource={data} />
 }
 export default Contacts
