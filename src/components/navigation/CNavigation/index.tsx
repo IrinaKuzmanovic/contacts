@@ -5,6 +5,7 @@ import CLabels from '../CLabels'
 import PrimaryButton from 'shared/PrimaryButton'
 import CMenu from '../CMenu'
 import './style.scss'
+import store from 'store'
 
 const CNavigation: FC = () => {
   const navigate = useNavigate()

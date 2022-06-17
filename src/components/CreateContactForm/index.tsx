@@ -1,11 +1,17 @@
-import React, { FC } from 'react'
-import Input from 'shared/CInput'
+import React, { FC, useState } from 'react'
+import CInput from 'shared/CInput'
 import { Form, Select } from 'antd'
 import Labels from 'shared/Label'
 import SecondaryButton from 'shared/SecondaryButton'
 import PrimaryButton from 'shared/PrimaryButton'
 import Avatar from 'assets/avatar.svg'
 import './style.scss'
+import { useDispatch, useSelector } from 'react-redux'
+import store from 'store'
+import { Contact } from 'shared/tableColumns'
+import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
+import { addContact } from 'store/contacts/actions'
 
 const { Option } = Select
 
@@ -14,6 +20,16 @@ type CreateContactFormProps = {
 }
 
 const CreateContactForm: FC<CreateContactFormProps> = ({ style }) => {
+  const navigate = useNavigate()
+
+  const handleSubmit = (values: Contact) => {
+    store.dispatch(addContact(values))
+    navigate('/')
+  }
+
+  const handleCancel = () => {
+    navigate('/')
+  }
   return (
     <div style={style}>
       <div style={{ marginBottom: '24px' }}>
@@ -29,15 +45,21 @@ const CreateContactForm: FC<CreateContactFormProps> = ({ style }) => {
           </Select>
         </div>
       </div>
-      <Form>
+      <Form onFinish={handleSubmit}>
         <Labels text="Name" style={{ marginBottom: '4px' }} />
-        <Input style={{ marginBottom: '24px' }} />
+        <Form.Item name="name">
+          <CInput />
+        </Form.Item>
         <Labels text="Email address" style={{ marginBottom: '4px' }} />
-        <Input style={{ marginBottom: '24px' }} />
+        <Form.Item name="email">
+          <CInput />
+        </Form.Item>
         <Labels text="Phone number" style={{ marginBottom: '4px' }} />
-        <Input />
+        <Form.Item name="phoneNumber">
+          <CInput />
+        </Form.Item>
         <div className="form_actions">
-          <SecondaryButton text="Cancel" />
+          <SecondaryButton text="Cancel" onClick={handleCancel} />
           <PrimaryButton
             text="Create"
             type="submit"

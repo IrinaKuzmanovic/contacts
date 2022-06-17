@@ -31,6 +31,7 @@ export const tableColumns = (
         {record.favourite && (
           <img
             src={FavouriteOn}
+            style={{ cursor: 'pointer' }}
             alt="icon"
             onClick={() =>
               onFavouriteClick && onFavouriteClick(record.id, false)
@@ -40,6 +41,7 @@ export const tableColumns = (
         {!record.favourite && (
           <img
             src={FavouriteOff}
+            style={{ cursor: 'pointer' }}
             alt="icon"
             onClick={() =>
               onFavouriteClick && onFavouriteClick(record.id, true)
@@ -48,11 +50,13 @@ export const tableColumns = (
         )}
         <img
           src={DeleteIcon}
+          style={{ cursor: 'pointer' }}
           alt="delete icon "
           onClick={() => onDeleteClick && onDeleteClick(record.id)}
         />
         <img
           src={EditIcon}
+          style={{ cursor: 'pointer' }}
           alt="edit icon "
           onClick={() => onEditClick && onEditClick(record.id)}
         />

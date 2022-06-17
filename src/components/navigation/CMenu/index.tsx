@@ -1,5 +1,7 @@
 import React, { FC } from 'react'
+import { useSelector } from 'react-redux'
 import { useLocation, useNavigate } from 'react-router-dom'
+import { RootState } from 'store'
 import CItem from '../CItem'
 import './style.scss'
 
@@ -7,15 +9,24 @@ const CMenu: FC = () => {
   const location = useLocation()
   const navigate = useNavigate()
 
+  const contactsCount = useSelector(
+    (state: RootState) => state.contacts.contacts.length
+  )
+
+  const favouriteCount = useSelector(
+    (state: RootState) =>
+      state.contacts.contacts.filter((contact) => contact.favourite).length
+  )
+
   const items = [
     {
       text: 'Contacts',
-      count: 6,
+      count: contactsCount,
       selected: location.pathname === '/' ? true : false
     },
     {
       text: 'Favourites',
-      count: 3,
+      count: favouriteCount,
       selected: location.pathname === '/favourites' ? true : false
     }
   ]

@@ -1,11 +1,16 @@
-import { FC } from 'react'
-import Input from 'shared/CInput'
+import { FC, useState } from 'react'
+import CInput from 'shared/CInput'
 import { Form, Select } from 'antd'
 import Labels from 'shared/Label'
 import SecondaryButton from 'shared/SecondaryButton'
 import PrimaryButton from 'shared/PrimaryButton'
 import Avatar from 'assets/avatar.svg'
 import './style.scss'
+import { useSelector } from 'react-redux'
+import store, { RootState } from 'store'
+import { useNavigate, useParams } from 'react-router-dom'
+import { Contact } from 'shared/tableColumns'
+import { updateContact } from 'store/contacts/actions'
 const { Option } = Select
 
 type EditContactFormProps = {
@@ -13,6 +18,22 @@ type EditContactFormProps = {
 }
 
 const EditContactForm: FC<EditContactFormProps> = ({ style }) => {
+  let { id } = useParams()
+  const navigate = useNavigate()
+
+  const contact = useSelector((state: RootState) =>
+    state.contacts.contacts.find(
+      (contact) => contact.id == parseInt(id as string)
+    )
+  )
+  const handleSubmit = (values: Contact) => {
+    store.dispatch(updateContact({ ...values, id: parseInt(id as string) }))
+    navigate('/')
+  }
+  const handleCancel = () => {
+    navigate('/')
+  }
+
   return (
     <div style={style}>
       <div style={{ marginBottom: '24px' }}>
@@ -28,15 +49,28 @@ const EditContactForm: FC<EditContactFormProps> = ({ style }) => {
           </Select>
         </div>
       </div>
-      <Form>
+      <Form
+        onFinish={handleSubmit}
+        initialValues={{
+          name: contact?.name,
+          email: contact?.email,
+          phoneNumber: contact?.phoneNumber
+        }}
+      >
         <Labels text="Name" style={{ marginBottom: '4px' }} />
-        <Input style={{ marginBottom: '24px' }} />
+        <Form.Item name="name">
+          <CInput />
+        </Form.Item>
         <Labels text="Email address" style={{ marginBottom: '4px' }} />
-        <Input style={{ marginBottom: '24px' }} />
+        <Form.Item name="email">
+          <CInput />
+        </Form.Item>
         <Labels text="Phone number" style={{ marginBottom: '4px' }} />
-        <Input />
+        <Form.Item name="phoneNumber">
+          <CInput />
+        </Form.Item>
         <div className="edit-form_actions">
-          <SecondaryButton text="Cancel" />
+          <SecondaryButton text="Cancel" onClick={handleCancel} />
           <PrimaryButton
             text="Save"
             type="submit"
