@@ -6,9 +6,9 @@ import DeleteIcon from 'assets/deleteIcon.svg'
 import EditIcon from 'assets/editIcon.svg'
 
 export const tableColumns = (
-  onFavouriteClick?: (id: number, favourite: boolean) => void,
+  onEditClick?: (id: number) => void,
   onDeleteClick?: (id: number) => void,
-  onEditClick?: (id: number) => void
+  onFavouriteClick?: (id: number, favourite: boolean) => void
 ): ColumnsType<Contact> => [
   {
     title: 'NAME',
@@ -22,8 +22,8 @@ export const tableColumns = (
   },
   {
     title: 'PHONE NUMBER',
-    dataIndex: 'address',
-    key: 'address'
+    dataIndex: 'phoneNumber',
+    key: 'phoneNumber'
   },
   {
     render: (_, record) => (
@@ -48,12 +48,12 @@ export const tableColumns = (
         )}
         <img
           src={DeleteIcon}
-          alt="icon delete"
+          alt="delete icon "
           onClick={() => onDeleteClick && onDeleteClick(record.id)}
         />
         <img
           src={EditIcon}
-          alt="icon edit"
+          alt="edit icon "
           onClick={() => onEditClick && onEditClick(record.id)}
         />
       </Space>

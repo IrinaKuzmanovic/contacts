@@ -1,7 +1,8 @@
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import { Table } from 'antd'
-
 import { Contact, tableColumns } from 'shared/tableColumns'
+import { useNavigate, useParams } from 'react-router-dom'
+import DeleteContact from './DeleteContact'
 
 const data: Contact[] = [
   {
@@ -28,6 +29,19 @@ const data: Contact[] = [
 ]
 
 const Contacts: FC = () => {
-  return <Table className="table" columns={tableColumns()} dataSource={data} />
+  const onDeleteClick = () => {}
+  const onEditClick = () => {}
+  const onFavouriteClick = () => {}
+
+  return (
+    <div>
+      <Table
+        className="table"
+        columns={tableColumns(onDeleteClick, onEditClick, onFavouriteClick)}
+        dataSource={data}
+      />
+      <DeleteContact />
+    </div>
+  )
 }
 export default Contacts
