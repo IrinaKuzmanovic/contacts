@@ -4,7 +4,7 @@ import { Form, Select } from 'antd'
 import Labels from 'shared/Label'
 import SecondaryButton from 'shared/SecondaryButton'
 import PrimaryButton from 'shared/PrimaryButton'
-import Avatar from 'assets/Avatar.svg'
+import Avatar from 'assets/avatar.svg'
 import './style.scss'
 const { Option } = Select
 

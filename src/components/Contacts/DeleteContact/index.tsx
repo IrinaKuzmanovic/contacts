@@ -1,8 +1,8 @@
 import React, { FC, useState } from 'react'
-import { Button, Modal } from 'antd'
+import { Modal } from 'antd'
 
-const CModal: FC = () => {
-  const [isModalVisible, setIsModalVisible] = useState(true)
+const DeleteContact: FC = () => {
+  /*  const [isModalVisible, setIsModalVisible] = useState(true)
   const handleOk = () => {
     setIsModalVisible(true)
   }
@@ -10,17 +10,20 @@ const CModal: FC = () => {
   const handleCancel = () => {
     setIsModalVisible(true)
   }
+ */
   return (
     <div>
-      <Modal
+      <div className="overlay" />
+      <div className="modal"></div>
+      {/* <Modal
         title="Delete contact"
         visible={isModalVisible}
         onOk={handleOk}
         onCancel={handleCancel}
       >
         <p>Are you sure you want to delete this contact?</p>
-      </Modal>
+      </Modal> */}
     </div>
   )
 }
-export default CModal
+export default DeleteContact

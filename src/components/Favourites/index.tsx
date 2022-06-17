@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import { Table } from 'antd'
 import { Contact, tableColumns } from 'shared/tableColumns'
 const data: Contact[] = [
@@ -26,6 +26,17 @@ const data: Contact[] = [
 ]
 
 const Favourites: FC = () => {
-  return <Table columns={tableColumns()} dataSource={data} />
+  const [isOpen, setIsOpen] = useState(false)
+
+  const onDeleteClick = () => {}
+  const onEditClick = () => {}
+  const onFavouriteClick = () => {}
+
+  return (
+    <Table
+      columns={tableColumns(onDeleteClick, onEditClick, onFavouriteClick)}
+      dataSource={data}
+    />
+  )
 }
 export default Favourites
