@@ -1,46 +1,56 @@
-import { FC, useState } from 'react'
+import { FC, useEffect } from 'react'
 import { Table } from 'antd'
 import { Contact, tableColumns } from 'shared/tableColumns'
-import { useNavigate, useParams } from 'react-router-dom'
-import DeleteContact from './DeleteContact'
-
-const data: Contact[] = [
-  {
-    id: 1,
-    name: 'Jane Cooper',
-    email: 'jane.cooper@example.com',
-    phoneNumber: '+365897456555',
-    favourite: true
-  },
-  {
-    id: 2,
-    name: 'Cody Fisher',
-    email: 'cody.fisher@example.com',
-    phoneNumber: '+35412877',
-    favourite: false
-  },
-  {
-    id: 3,
-    name: 'Esther Howard',
-    email: 'esther.howard@example.com',
-    phoneNumber: '+37412589',
-    favourite: false
-  }
-]
+import { useDispatch, useSelector } from 'react-redux'
+import store, { RootState } from 'store'
+import {
+  deleteContact,
+  favouriteContact,
+  unfavouriteContact
+} from 'store/contacts/actions'
+import { useNavigate } from 'react-router-dom'
 
 const Contacts: FC = () => {
-  const onDeleteClick = () => {}
-  const onEditClick = () => {}
-  const onFavouriteClick = () => {}
+  const navigate = useNavigate()
+
+  const contacts = useSelector((state: RootState) =>
+    state.contacts.contacts.filter(
+      (contact) =>
+        (state.contacts.search
+          ? contact.email.includes(state.contacts.search)
+          : true) ||
+        (state.contacts.search
+          ? contact.name.includes(state.contacts.search)
+          : true) ||
+        (state.contacts.search
+          ? contact.phoneNumber.includes(state.contacts.search)
+          : true)
+    )
+  )
+
+  const onDeleteClick = (id: number) => {
+    store.dispatch(deleteContact(id))
+  }
+
+  const onEditClick = (id: number) => {
+    navigate(`/edit-contact/${id}`)
+  }
+
+  const onFavouriteClick = (id: number, favourite: boolean) => {
+    if (favourite) {
+      store.dispatch(favouriteContact(id))
+    } else {
+      store.dispatch(unfavouriteContact(id))
+    }
+  }
 
   return (
     <div>
       <Table
         className="table"
-        columns={tableColumns(onDeleteClick, onEditClick, onFavouriteClick)}
-        dataSource={data}
+        columns={tableColumns(onEditClick, onDeleteClick, onFavouriteClick)}
+        dataSource={contacts}
       />
-      <DeleteContact />
     </div>
   )
 }
